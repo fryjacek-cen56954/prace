@@ -1,11 +1,55 @@
-# prace
+# Podklady k pracovním úkolům
 
+Společný zdroj podkladů pro člověka, custom AI agenta a jeho RAG knowledge base.
+Primárním zdrojem pravdy jsou soubory v Gitu; vektorový index je odvozený a lze jej znovu sestavit.
 
-## Poslat agentovi
-V tomto repu budu mít podklady k pracovnim ukolum. Ukoly budou rozdelene podle aplikaci (funsel, funsels) a pak v podadresarich. Kazdy ukol má kod ve formátu CSO-xxxxxx nebo DFM-xxxxxx (x je číslo) a tyto kódy je možné dohledat ve Atlassian (např. https://csas.atlassian.net/browse/DFM-219963).
-K úkoly si budu ukládat dokuementy v markdown, kde budou výsledky analýz agentů AI, moje zadání pro agenty, obrázky s UI, diagramy z Enterprise Architect.
-V adresářích s aplikacemi bude markdown s názevm <aplikace>-TASKS.md, kde bude na jednu řádku popis úkolu a odkaz na adresář s ukolem.
-Každý úkol bude mít ve svém adresář soubor README.md, kde bude základní popis, současný stav, rozcestník a vysvětlení obsahu ostatních souborů v adresáři.
+## Rozcestník
 
-Důležité: tato struktura musí sloužit jak pro člověka, tak pro custom agenta a RAG. Custom agent bude v ukolech hledat a těžit informace. RAG bude informace doplnovat do knowledgebase pro toho agenta.
-Pro agenta a RAG udělej složku "ai" a v ní navrhni stručně toho custom agenta a také záklaní RAG postavené na Langchain v python.
+- [Úkoly funsel](funsel/funsel-TASKS.md)
+- [Úkoly funsels](funsels/funsels-TASKS.md)
+- [Šablony a metadata](templates/README.md)
+- [Custom agent a RAG](ai/README.md)
+- [Pravidla pro agenty](AGENTS.md)
+- [Původní zadání](docs/zadani-repozitare.md)
+
+## Struktura
+
+```text
+funsel/
+  funsel-TASKS.md
+  DFM-xxxxxx/                 # xxxxxx nahraďte šesti číslicemi
+    README.md                # popis, stav, rozcestník všech podkladů
+    zadani.md                # zadání člověka pro agenta
+    analyza.md               # výsledek analýzy, zdroje a otevřené otázky
+    rozhodnuti.md            # potvrzená rozhodnutí a jejich důvody
+    assets/
+      ui-prehled.png
+      ui-prehled.md          # textový popis obrázku
+      ea-proces.svg
+      ea-proces.md           # textový přepis diagramu
+funsels/
+  funsels-TASKS.md
+templates/
+ai/
+```
+
+Ukázkové názvy výše nejsou skutečné úkoly. Adresář úkolu je přímo pod aplikací
+a jmenuje se přesně `CSO-` nebo `DFM-` následované šesti číslicemi.
+Stejný úkol může mít podklady v obou aplikacích; identita je dvojice aplikace + kód.
+
+## Založení a údržba úkolu
+
+1. Vytvořte například `funsel/DFM-219963/` a vložte do něj vyplněnou
+   [šablonu README](templates/task-README.md). Jde jen o příklad kódu, nikoli o popis jeho skutečného obsahu.
+2. Doplňte základní popis, aktuální stav a odkaz na Atlassian:
+   `https://csas.atlassian.net/browse/DFM-219963`.
+3. Do `funsel-TASKS.md` přidejte jednu odrážku na jeden řádek:
+   `- [DFM-219963](DFM-219963/) — Stručný popis úkolu.`
+4. Přidávejte podklady podle [šablon](templates/README.md). V README udržujte
+   rozcestník s vysvětlením každého souboru, včetně příloh a jejich textových popisů.
+5. Při změně dokumentu upravte `updated`. Při změně stavu úkolu upravte stav v jeho README.
+   Odlište potvrzená fakta od návrhů AI; rozpory a nahrazená rozhodnutí označte přímo v textu.
+6. Po změnách spusťte [obnovu RAG indexu](ai/README.md). Bez ní RAG pracuje s posledním indexovaným stavem.
+
+Používejte UTF-8, relativní odkazy, smysluplné nadpisy a názvy souborů bez mezer.
+Textový popis obrázku nebo diagramu patří vedle přílohy se stejným základem názvu.

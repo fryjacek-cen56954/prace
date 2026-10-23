@@ -1,0 +1,10 @@
+# Lokální prostředí a odvozená knowledge base
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.env.*
+!.env.example
+ai/.chroma/
+.DS_Store
